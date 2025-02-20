@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arithmetic;
+//package arithmetic;
 
 
 import java.util.Scanner;
@@ -15,22 +15,34 @@ import static java.time.Clock.system;
  * @author sivagamasrinivasan
  * 
  */
-public class Arithmetic 
-{
+import java.util.Scanner;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) 
-    {
-       
-        ArithmeticBase r= new ArithmeticBase();
-        Scanner in= new Scanner(System.in);
-        int n= in.nextInt();
-        int m= in.nextInt();
-        double result = r.calculate(m,n);
-        System.out.println("result :" +result); 
-    
+/** This class performs arithmetic operations based on user input
+ * @author sivagamasrinivasan
+ */
+import java.util.Scanner;
+
+public class Arithmetic {
+    public static void main(String[] args) {
+        ArithmeticBase r = new ArithmeticBase();
+        Scanner in = new Scanner(System.in);
+
+        System.out.print("Enter first number: ");
+        double n = in.nextDouble();
+        System.out.print("Enter second number: ");
+        double m = in.nextDouble();
+        in.nextLine(); 
+
+        System.out.println("Enter operation (PLUS, MINUS, TIMES, DIVIDE): ");
+        String operationInput = in.nextLine().toUpperCase(); 
+
+        try {
+        
+            Operation operation = Operation.valueOf(operationInput);
+            double result = r.calculate(n, m, operation);
+            System.out.println("Result: " + result);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Invalid operation. Please enter one of: PLUS, MINUS, TIMES, DIVIDE.");
+        }
     }
 }
-
